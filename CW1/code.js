@@ -15,7 +15,7 @@ var myAge = prompt("Сколько тебе лет?","");
 
 var myName = prompt("Как тебя зовут?","");
 var arr =  whiteList["Зевс", "Геркулес", "Аид", "Дионис"];
-   if(myName = whitelist.some) console.log("Ключ от сейфа под столом");
+   if(whitelist.includes(myName)) console.log("Ключ от сейфа под столом");
      else console.log("Иди своей дорогой, путник...");
 
 // #4
