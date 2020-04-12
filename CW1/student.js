@@ -15,18 +15,10 @@ function createstudent (name, age, agree, rating) {
     leapYear(){
         let leapY = 0;
         let bY = this.birthYear();
-            if(bY%4 == 0) {
-                if(bY%100 == 0) {
-                    if(bY%400 == 0) {
-                        return 1;
-                    }
-                    else
-                        return 0;
-                }
-                else
-                    return 1;
-            }
-            return 0;
+            if (bY % 4 === 0){
+                         leapY = 1;
+            }  
+        return leapY
     },
     
     predictedPoints(){
