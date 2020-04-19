@@ -1,17 +1,9 @@
-# What i want to do in 2020 year
+# Homework 3: static patterns
 
-To-do list:
-1. Eating some icecream
-2. Upgrade my English for IELTS
-3. Travelling
+1. Abstract
 
-What countries i want to visit:
-* Japan
-![Japan](https://premiumtravel.kz/sites/default/files/y11112019_25.jpg)
+![Abstract](photos/2020-04-20_01-23-11.png)
 
-* Zimbabve
-![Zimbabve](https://cdni.rt.com/russian/images/2019.02/article/5c6261901835611c348b460a.jpg)
+2. Pattern
 
-* Germany
-
-![Germany](photos/berlin-1.jpg)
+![Pattern](photos/2020-04-20_01-28-14.png)
