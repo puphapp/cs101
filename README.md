@@ -2,4 +2,4 @@
 
 Inspired by Truchet pattern
 
-![Pattern](photos/2020-04-20_01-28-14.png)
+![Pattern](photos/GIF 27.04.2020 0-34-15.gif)
