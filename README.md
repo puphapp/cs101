@@ -1,9 +1,5 @@
-# Homework 3: static patterns
+# Homework 4: motion
 
-1. Abstract
-
-![Abstract](photos/2020-04-20_01-23-11.png)
-
-2. Pattern
+Inspired by Truchet pattern
 
 ![Pattern](photos/2020-04-20_01-28-14.png)
