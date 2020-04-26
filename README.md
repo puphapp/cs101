@@ -2,4 +2,4 @@
 
 Inspired by Truchet pattern
 
-![Pattern](photos/GIF 27.04.2020 0-34-15.gif)
+![Pattern](https://github.com/puphapp/cs101/blob/master/photos/GIF%2027.04.2020%200-34-15.gif)
