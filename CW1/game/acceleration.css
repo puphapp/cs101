@@ -1,0 +1,10 @@
+body {background-image: url("https://krot.info/uploads/posts/2020-01/thumbs/1579207134_45-104.jpg");
+     background-repeat: no-repeat;
+}
+
+#doggo.position_absolute {
+            position:absolute;
+            font-size:22px;
+            top:185px;
+            left: 30px;
+  }
