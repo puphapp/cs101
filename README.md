@@ -1,4 +1,4 @@
-# Nomework 5: game
+# Nomework 6: game
 
 ![Game](https://github.com/puphapp/cs101/blob/master/photos/game.gif)
 
