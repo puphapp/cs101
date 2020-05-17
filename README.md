@@ -1,3 +1,7 @@
+# Nomework 5: game
+
+![Game](https://github.com/puphapp/cs101/blob/master/photos/game.gif)
+
 # Homework 5: acceleration
 
 ![Game](https://github.com/puphapp/cs101/blob/master/photos/doggo.gif)
