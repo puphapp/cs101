@@ -1,6 +1,7 @@
 let krtek;
 let krtek2;
 let ground;
+let state;
 let score = 0;
 let scroll = 10;
 let scrollG = 0;
@@ -43,13 +44,40 @@ function setup() {
   krtek2.depth = 1;
   krtek2.velocity.x = -3;
   
-  updateSprites(false); 
+  state = 'start';
   
-  createP('Hello! Press space to jump')
+  updateSprites(false);
+}
+
+function start(){
+  background(bgImg);
+  
+  image(gImg, -scrollG, 440, width, 100);
+  image(gImg, -scrollG + width, 440, width, 100);
+  
+  fill(0)
+  textSize(20);
+  textFont('helvetica');
+  text('Press S to start', 300, (height/2)-15);
+  text('and press space to jump', 260, (height/2)+15);
 }
 
 function draw() {  
   background(bgImg);
+  
+  if (state === 'start') {
+    start();
+  }
+  else if(state === 'game') {
+    game();
+  }
+  
+  if (state === 'start' && keyIsPressed && key === 's') {
+    state = 'game';
+  }
+}
+
+function game(){
   
   image(gImg, -scrollG, 440, width, 100);
   image(gImg, -scrollG + width, 440, width, 100);
@@ -93,7 +121,7 @@ function draw() {
       fill(0)
       textSize(20);
       textFont('helvetica');
-      text(`Game Over! Press space to restart`, 200 , height/2)
+      text(`Game Over! Press jump button to restart`, 200 , height/2)
       restart = true;
     } 
   drawSprites();
