@@ -12,6 +12,7 @@ let groundSpeed = 3;
 let acceleration = 0.8;
 let direction = 0;
 var restart=false;
+let stateChanged = true;
 
 function preload(){
  jump = loadSound('assets/jump.mp3'); 
@@ -47,6 +48,9 @@ function setup() {
   state = 'start';
   
   updateSprites(false);
+  
+  ost.play();
+    loop();
 }
 
 function start(){
@@ -71,9 +75,15 @@ function draw() {
   else if(state === 'game') {
     game();
   }
+  else if(state === 'over') {
+    over();
+  }
   
-  if (state === 'start' && keyIsPressed && key === 's') {
+  if (state === 'start' && keyIsPressed && key == 's') {
     state = 'game';
+  }
+  if (state === 'over' && keyIsPressed && key === 'r') {
+    document.location.reload(true);
   }
 }
 
@@ -114,37 +124,106 @@ function game(){
   }  
   
   if(krtek.collide(krtek2)) {
-      noLoop()
-      ost.stop();
-      fail.play();
-      
-      fill(0)
-      textSize(20);
-      textFont('helvetica');
-      text(`Game Over! Press jump button to restart`, 200 , height/2)
-      restart = true;
+    state = 'over';  
+    stateChanged = true;
+    ost.stop();
+    fail.play();
     } 
   drawSprites();
   scroll += 0.002;
   scrollG += scroll / 5;
 }
 
-function keyPressed() {
-  if (restart){
-    restart = false;
-    score = 0;
-    scrollG = 0;
-    scroll = 10;
-    ost.play();
-    loop();
-  }
-  if (key == ' ') {
-      newGame();
-      return false;
-  }
-}
+function over(){
+      fill(0);
+      textSize(20);
+      textFont('helvetica');
+      text('Game Over! Press R to restart', 200 , (height/2)-15);
+      text(`Your score: ${score}`, 270, (height/2)+15);
+      
+      if (stateChanged) {
+    stateChanged = false;
+     let body = document.querySelector('body');
+    
+    let topBlock = document.createElement('div');
+    topBlock.setAttribute('class', 'topblock');
 
-function newGame() {
-  updateSprites(true);
-  krtek.velocity.y = -JUMP;
+    let form = document.createElement('form');
+    form.style.position = "absolute";
+    form.style.top = "50%"; 
+    form.style.left = "50%"; 
+    form.style.transform = "translateX(-50%)";
+
+    let newBtn = document.createElement('button');
+    newBtn.textContent = "Save";
+    
+    let newInput = document.createElement('input');
+    newInput.setAttribute('type', 'text');
+    newInput.setAttribute('placeholder', 'Enter name to save score');
+    newInput.setAttribute('maxlength', 20);
+    newInput.required = true;
+
+    let allBtn = document.createElement('button');
+    allBtn.textContent = "Get TOP5";
+    allBtn.setAttribute('class', 'top-btn');
+    allBtn.style.position = "absolute";
+    allBtn.style.top = "55%";
+    allBtn.style.left = "50%"; 
+    allBtn.style.transform = "translateX(-50%)";
+
+    let topDiv = document.createElement('div');
+    topDiv.setAttribute('class', 'top-list');
+
+    body.appendChild(topBlock);
+
+    topBlock.appendChild(form);
+    form.appendChild(newInput);
+    form.appendChild(newBtn);
+
+    topBlock.appendChild(topDiv);
+    topBlock.appendChild(allBtn);
+    
+    form.addEventListener('submit', (e) => {
+        console.log("button pressed");
+        fetch('/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },        
+            body: JSON.stringify({name: newInput.value, score: score})
+        })
+        .then(resp => resp.json())
+        .then(data => {
+                console.log(data);
+        })
+        .catch(e => console.log(e));
+        
+        form.remove();
+        e.preventDefault();     
+    });
+
+    allBtn.addEventListener('click', (event) => {
+        fetch('/top/5')
+            .then(resp => resp.json())
+            .then(data => {
+                let ol = document.createElement('ol');
+                let jd = JSON.parse(data.top);
+                if(topDiv.hasChildNodes()) {
+                    while (topDiv.firstChild) {
+                        topDiv.removeChild(topDiv.firstChild);
+                    }
+                    ol.remove();
+                }  
+                
+                for (let item of jd) {
+                    console.log(item.username, item.score);
+                    let li = document.createElement('li');
+                    li.textContent = `${item.username}: \t${item.score}`;
+                    ol.appendChild(li);
+                }
+                topDiv.appendChild(ol);
+            })
+            .catch(e => console.log(e));
+    });
+}
 }
